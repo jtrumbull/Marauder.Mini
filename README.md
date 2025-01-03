@@ -10,7 +10,7 @@
 
 ```
 Description:                                                                                                                                                     
-  Maurading and such
+  Marauding and such
 
 Usage:
   marauder [command] [options]
