@@ -1,5 +1,6 @@
 using System.CommandLine;
 using Marauder.Mini.Commands;
+using Marauder.Mini.Models;
 using Microsoft.Extensions.Logging;
 
 namespace Marauder.Mini;
@@ -33,9 +34,14 @@ public class Application : RootCommand
             _logger.LogTrace(Finish, "Finished");
             return 0x00;
         }
+        catch(ProcessModuleNotFoundException)
+        {
+            _logger.LogError(Error, "An unhandled exception was caught in the main thread");
+            return 0x01;
+        }
         catch(Exception ex)
         {
-            _logger.LogError(Error, ex, "An unhandled exception was caught in the main thread");
+            _logger.LogError(Error, "An unhandled exception was caught in the main thread");
             return 0x01;
         }
     }

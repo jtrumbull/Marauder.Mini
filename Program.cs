@@ -1,4 +1,5 @@
 using Marauder.Mini.Commands;
+using Marauder.Mini.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,6 +34,7 @@ public class Program
             .ConfigureLogging((context, builder) =>
             {
                 builder.ClearProviders();
+                builder.SetMinimumLevel(LogLevel.Debug);
                 builder.AddConsole(console => 
                 {
                     console.FormatterName = "AppFormatter";
@@ -49,6 +51,8 @@ public class Program
                 services.AddTransient<RunCommand>();
                 services.AddTransient<TestCommand>();
                 services.AddTransient<CancellationTokenSource>();
+
+                services.AddSingleton<IGameClientService, GameClientService>();
             });
     
     public class AppFormatter(IOptions<ConsoleFormatterOptions> options) 
@@ -112,3 +116,27 @@ public class Program
         }
     }
 }
+
+// using System;
+// using System.Threading.Tasks;
+
+// class Program
+// {
+//     static async Task Main(string[] args)
+//     {
+//         int i = 0;
+//         while (true)
+//         {
+//             await PerformAsyncOperation(i);
+//             i++;
+//             // Additional logic or a delay can be added here
+//         }
+//     }
+
+//     static async Task PerformAsyncOperation(int i)
+//     {
+//         // Simulate an asynchronous operation
+//         await Task.Delay(1000);
+//         Console.WriteLine($"Operation {i} completed at {DateTime.Now}");
+//     }
+// }
