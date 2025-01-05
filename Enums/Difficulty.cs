@@ -4,5 +4,5 @@ public enum Difficulty
 {
     Normal,
     Nightmare,
-    Hell
+    Hell,
 }

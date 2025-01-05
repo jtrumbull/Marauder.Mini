@@ -20,7 +20,7 @@ public class TestCommand : Command
                 logger.LogInformation("Running test command");
 
                 using var cts = new CancellationTokenSource();
-                using var client = await gameClientService.Start(cts.Token);
+                using var client = await gameClientService.StartAsync(cts.Token);
 
                 logger.LogDebug($"Process-> ID: 0x{client.GetProcessId().ToString("X")}");
                 logger.LogDebug($"Process-> Handle: 0x{client.GetProcessHandle().ToString("X")}");
@@ -78,8 +78,8 @@ public class TestCommand : Command
             }
             catch(Exception ex)
             {
+                logger.LogError(ex, $"An unhandled error was caught: {ex}");
                 throw;
-                //logger.LogError(ex, $"An unhandled error was caught: {ex}");
             }
         });
     }

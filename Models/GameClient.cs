@@ -29,7 +29,7 @@ public static class GameClientExtensions
 /// </summary>
 public class GameClient : IDisposable
 {
-    public event EventHandler Exited;
+    public event EventHandler Exited = default!;
 
     protected const string ProcessName = "D2R";
     protected const string ModuleName = "D2R.exe";
@@ -37,18 +37,9 @@ public class GameClient : IDisposable
     private readonly Process _process;
     private readonly ProcessModule _module;
     //private readonly GameReader _reader;
-    private Thread _thread;
     private bool _running;
-    private bool _threadRunning;
+    //private bool _threadRunning;
     private nint _processHandle;
-
-    public bool HasExited
-    {
-        get
-        {
-            return _process.HasExited;
-        }
-    }
 
     /// <summary>
     /// Game client constructor
@@ -57,7 +48,7 @@ public class GameClient : IDisposable
     {
         _process = GetProcessByName(ProcessName);
         _module = _process.GetModuleByName(ModuleName);
-
+        
         _process.Exited += (sender, e) => OnExited(e);
     }
 
@@ -88,6 +79,7 @@ public class GameClient : IDisposable
         _running = false;
     }
 
+    public bool HasExited => _process.HasExited;
     public nint GetProcessId() => _process.Id;
     public nint GetProcessHandle() => _processHandle;
     public nint GetBaseAddress() => _module.BaseAddress;
@@ -186,7 +178,8 @@ public class GameClient : IDisposable
 
     public async Task UpdateAsync()
     {
-        
+        await Task.Delay(0);
+        throw new NotImplementedException();
     }
 }
 

@@ -9,7 +9,7 @@
 ```
 
 ```
-Description:                                                                                                                                                     
+Description:
   Marauding and such
 
 Usage:

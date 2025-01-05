@@ -3,17 +3,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Marauder.Mini.Services;
 
-public interface IGameClientService
-{
-    Task<GameClient> Start(CancellationToken token);
-}
-
 public class GameClientService(ILogger<GameClientService> logger) : IGameClientService
 {
-    public event EventHandler Resized = default!;
-    public event EventHandler Minimized = default!;
-    public event EventHandler Restored = default!;
-    public event EventHandler Exited = default!;
+    // public event EventHandler Resized = default!;
+    // public event EventHandler Minimized = default!;
+    // public event EventHandler Restored = default!;
+    // public event EventHandler Exited = default!;
 
     private bool _running;
     private Thread _thread = default!;
@@ -22,11 +17,11 @@ public class GameClientService(ILogger<GameClientService> logger) : IGameClientS
     private Mutex _mutex = new();
 
     /// <summary>
-    /// Start game client
+    /// Start the game client process
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
-    public async Task<GameClient> Start(CancellationToken token)
+    public async Task<GameClient> StartAsync(CancellationToken token)
     {
         if (_running) return _client;
 
@@ -83,5 +78,10 @@ public class GameClientService(ILogger<GameClientService> logger) : IGameClientS
         {
 
         }
+    }
+
+    public Task StopAsync()
+    {
+        throw new NotImplementedException();
     }
 }

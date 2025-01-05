@@ -1,4 +1,5 @@
 using Marauder.Mini.Commands;
+using Marauder.Mini.Commands.Build;
 using Marauder.Mini.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,10 +48,12 @@ public class Program
             .ConfigureServices((context, services) =>
             {
                 services.AddSingleton<Application>();
-                services.AddTransient<ChantCommand>();
-                services.AddTransient<RunCommand>();
-                services.AddTransient<TestCommand>();
-                services.AddTransient<CancellationTokenSource>();
+                services.AddScoped<BuildCommand>();
+                services.AddScoped<BuildEnumsCommand>();
+                services.AddScoped<ChantCommand>();
+                services.AddScoped<RunCommand>();
+                services.AddScoped<TestCommand>();
+                services.AddScoped<CancellationTokenSource>();
 
                 services.AddSingleton<IGameClientService, GameClientService>();
             });

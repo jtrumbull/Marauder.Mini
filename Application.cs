@@ -14,6 +14,7 @@ public class Application : RootCommand
     private readonly ILogger<Application> _logger;
 
     public Application(
+        BuildCommand buildCommand,
         RunCommand run,
         TestCommand test,
         CancellationTokenSource tokenSource,
@@ -22,6 +23,7 @@ public class Application : RootCommand
         _tokenSource = tokenSource;
         _logger = logger;
 
+        AddCommand(buildCommand);
         AddCommand(run);
         AddCommand(test);
     }
@@ -41,7 +43,7 @@ public class Application : RootCommand
         }
         catch(Exception ex)
         {
-            _logger.LogError(Error, "An unhandled exception was caught in the main thread");
+            _logger.LogError(Error, ex, $"An unhandled exception was caught in the main thread: {ex.Message}");
             return 0x01;
         }
     }
