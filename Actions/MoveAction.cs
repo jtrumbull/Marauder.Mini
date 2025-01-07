@@ -3,11 +3,11 @@ using Marauder.Mini.Enums;
 
 namespace Marauder.Mini.Actions;
 
-public class MoveAction : BaseAction
+public class MoveAction() : ActionBase("move")
 {
-    public override async Task RunAsync(CancellationToken token)
+    public override ValueTask<bool> CanExecuteAsync(IReadOnlyDictionary<string, object>? context = null, CancellationToken cancellationToken = default)
     {
-        await Task.Delay(0);
+        throw new NotImplementedException();
     }
 
     public async Task RunAsync(Area area, CancellationToken token)
@@ -26,4 +26,9 @@ public class MoveAction : BaseAction
 
     public async Task RunAsync(int x, int y, CancellationToken token)
         => await RunAsync(new Position(x, y), token);
+
+    protected override Task<ActionResult> ExecuteCoreAsync(IReadOnlyDictionary<string, object>? context, IProgress<double>? progress, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

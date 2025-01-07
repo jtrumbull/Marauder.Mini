@@ -13,11 +13,6 @@ public class Unit
     public uint Id;
 }
 
-public class ItemUnit : Unit
-{
-    public UnitType Type = UnitType.Item;
-}
-
 public class ObjectUnit : Unit
 {
     public UnitType Type = UnitType.Object;

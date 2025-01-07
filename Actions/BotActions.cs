@@ -11,11 +11,14 @@ public static class BotActions
         return move;
     }
 
-    public static ActionSequence MoveTo(Area area)
+    public static IAction MoveTo(Area area)
     {
-        var sequence = new ActionSequence();
-        var move = new MoveAction();
-        sequence.Enqueue(move);
+        var sequence = new CompositeAction(new[]
+        {
+            new MoveAction(),
+            new MoveAction(),
+            new MoveAction()
+        });
         return sequence;
     }
 

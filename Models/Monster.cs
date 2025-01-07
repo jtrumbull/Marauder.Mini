@@ -1,6 +1,11 @@
 namespace Marauder.Mini.Models;
 
-public class Monster
+public class MonsterUnit
+{
+    
+}
+
+public class Monster : MonsterUnit
 {
     
 }
